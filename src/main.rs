@@ -1,8 +1,9 @@
+#![allow(dead_code)]
 mod days;
 mod helpers;
 
 fn main() {
     let data = helpers::file::read_file("data.txt");
     let input = helpers::file::to_list(&data);
-    days::day3::solve(input, 1, 3);
+    days::day3::solve(input, 3, 1);
 }
