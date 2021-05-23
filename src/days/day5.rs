@@ -14,9 +14,19 @@ fn left_right(c: char, low: i32, high: i32) -> i32 {
 fn solve_line(mut line: Vec<char>, low: i32, high: i32) -> i32 {
     let c = line.pop().unwrap();
     let new = ((low as f64 + high as f64) / 2 as f64).floor() as i32;
+    //println!("{}, {}, {}, {}", c, low, high, new);
+    if line.is_empty() {
+        return match c {
+            'F' => low,
+            'L' => low,
+            _ => high,
+        };
+    }
+    /*
     if line.is_empty() {
         return low;
     }
+    */
     match c {
         'F' => solve_line(line, low, new),
         'L' => solve_line(line, low, new),
@@ -34,7 +44,8 @@ fn part1(lines: &Vec<&str>) {
         let list_last: Vec<char> = last.chars().rev().collect();
         let row = solve_line(list_first, 0, 127);
         let seat = solve_line(list_last, 0, 7);
-        let res = (row * 8) + (seat + 1);
+        //println!("Tulos: {}, {}", row, seat);
+        let res = (row * 8) + (seat);
         values.push(res);
     }
     let max_values = values.iter().max().unwrap();
