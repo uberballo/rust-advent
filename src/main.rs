@@ -4,5 +4,5 @@ mod helpers;
 
 fn main() {
     let data = helpers::file::read_file("data.txt");
-    days::day6::solve(data);
+    days::day8::solve(data);
 }
