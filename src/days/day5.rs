@@ -1,6 +1,6 @@
 pub fn solve(input: Vec<&str>) {
     part1(&input);
-    part2();
+    part2(&input);
 }
 
 fn left_right(c: char, low: i32, high: i32) -> i32 {
@@ -52,6 +52,33 @@ fn part1(lines: &Vec<&str>) {
     println!("{}", max_values);
 }
 
-fn part2() {
-    println!("Not implemented");
+fn missing(list: &mut Vec<i32>) -> i32 {
+    list.sort();
+    let mut first: i32 = *list.first().unwrap();
+    for l in list {
+        if first != *l {
+            return first;
+        }
+        first += 1;
+    }
+    return first;
+}
+
+fn part2(lines: &Vec<&str>) {
+    let mut values: Vec<i32> = Vec::new();
+    for line in lines {
+        let first: &str = &line[..7];
+        let last = &line[7..];
+
+        let list_first: Vec<char> = first.chars().rev().collect();
+        let list_last: Vec<char> = last.chars().rev().collect();
+        let row = solve_line(list_first, 0, 127);
+        let seat = solve_line(list_last, 0, 7);
+        //println!("Tulos: {}, {}", row, seat);
+        let res = (row * 8) + (seat);
+        values.push(res);
+    }
+    let res = missing(&mut values);
+
+    println!("part2: {}", res);
 }

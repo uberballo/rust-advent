@@ -8,3 +8,7 @@ pub fn read_file(name: &str) -> String {
 pub fn to_list(input: &str) -> Vec<&str> {
     input.split("\n").collect::<Vec<&str>>()
 }
+
+pub fn to_combined_list(input: &str) -> Vec<&str> {
+    input.split("\n\n").collect::<Vec<&str>>()
+}
